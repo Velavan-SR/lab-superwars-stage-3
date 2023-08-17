@@ -22,11 +22,26 @@ const PLAYERS = [
 ];
 
 // initialize players with image and strength
+
+function type(i){
+    if (i%2 === 0){
+        return "hero"
+    }else{
+        return "villain"
+    }
+}
+
 const initPlayers = (players) => {
-    let detailedPlayers = '';
+    let detailedPlayers = [];
 
     // Instead of forloop use Map method
     // Code here
+    players.map((item,i)=>{
+        detailedPlayers.push({name: item,
+            img: "images/super-"+(i+1)+".png",
+            strength: getRandomStrength(),
+            type: type(i)})
+    })
 
     return detailedPlayers;
 }
@@ -43,6 +58,10 @@ const buildPlayers = (players, type) => {
     // Instead of using for loop
     // Use chaining of Array methods - filter, map and join
     // Type your code here
+
+    fragment = players.filter((items)=>items.type === type).map((item)=>{
+        return "<div class='player'><img src="+ item.img +"><div class='name'>"+ item.name +"</div><div class='strength'>"+ item.strength +"</div></div>"
+    }).join(" ")
 
     return fragment;
 }
